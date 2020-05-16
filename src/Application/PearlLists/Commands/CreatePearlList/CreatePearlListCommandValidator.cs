@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem
+namespace PearlsOfWisdom.Application.PearlLists.Commands.CreatePearlList
 {
-    public class CreatePearlListCommandValidator : AbstractValidator<CreatePearlItemCommand>
+    public class CreatePearlListCommandValidator : AbstractValidator<CreatePearlListCommand>
     {
         public CreatePearlListCommandValidator()
         {
