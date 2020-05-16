@@ -1,13 +1,13 @@
-﻿using PearlsOfWisdom.Application.Common.Exceptions;
+﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
-using System.Threading.Tasks;
+using PearlsOfWisdom.Application.Common.Exceptions;
 using PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem;
 using PearlsOfWisdom.Application.PearlLists.Commands.CreatePearlList;
 using PearlsOfWisdom.Domain.Entities;
 
-namespace PearlsOfWisdom.Application.IntegrationTests.TodoItems.Commands
+namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
 {
     using static Testing;
 
@@ -23,7 +23,7 @@ namespace PearlsOfWisdom.Application.IntegrationTests.TodoItems.Commands
         }
 
         [Test]
-        public async Task ShouldCreateTodoItem()
+        public async Task ShouldCreatePearlItem()
         {
             var userId = await RunAsDefaultUserAsync();
 

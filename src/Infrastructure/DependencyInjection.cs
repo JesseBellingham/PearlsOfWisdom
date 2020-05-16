@@ -21,9 +21,13 @@ namespace PearlsOfWisdom.Infrastructure
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(
+                    options.UseNpgsql(
                         configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                        b =>
+                        {
+                            b.SetPostgresVersion(12, 2);
+                            b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                        }));
             }
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());

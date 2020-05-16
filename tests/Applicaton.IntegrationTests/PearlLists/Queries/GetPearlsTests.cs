@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+﻿using System.Threading.Tasks;
+using FluentAssertions;
 using NUnit.Framework;
-using System.Threading.Tasks;
 using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
 
-namespace PearlsOfWisdom.Application.IntegrationTests.TodoLists.Queries
+namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Queries
 {
     using static Testing;
 

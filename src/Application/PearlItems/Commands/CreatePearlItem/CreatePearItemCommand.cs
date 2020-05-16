@@ -14,11 +14,11 @@ namespace PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem
         public string Title { get; set; }
     }
 
-    public class CreateTodoItemCommandHandler : IRequestHandler<CreatePearlItemCommand, Guid>
+    public class CreatePearlItemCommandHandler : IRequestHandler<CreatePearlItemCommand, Guid>
     {
         private readonly IApplicationDbContext _context;
 
-        public CreateTodoItemCommandHandler(IApplicationDbContext context)
+        public CreatePearlItemCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }

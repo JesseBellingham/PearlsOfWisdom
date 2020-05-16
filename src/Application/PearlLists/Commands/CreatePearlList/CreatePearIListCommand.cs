@@ -25,14 +25,12 @@ namespace PearlsOfWisdom.Application.PearlLists.Commands.CreatePearlList
 
         public async Task<Guid> Handle(CreatePearlListCommand request, CancellationToken cancellationToken)
         {
-            var entity = new PearlItem
+            var entity = new PearlList
             {
-                ListId = request.ListId,
                 Title = request.Title,
-                Done = false
             };
 
-            await _context.PearlItems.AddAsync(entity);
+            await _context.PearlLists.AddAsync(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
 
