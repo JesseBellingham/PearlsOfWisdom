@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using PearlsOfWisdom.Application.Common.Exceptions;
 using PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem;
-using PearlsOfWisdom.Application.PearlLists.Commands.CreatePearlList;
-using PearlsOfWisdom.Domain.Entities;
 
 namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
 {
@@ -14,7 +11,7 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
     public class CreatePearlItemTests : TestBase
     {
         [Test]
-        public void ShouldRequireMinimumFields()
+        public void Should_Require_Minimum_Fields()
         {
             var command = new CreatePearlItemCommand();
 
@@ -23,32 +20,10 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
         }
 
         [Test]
-        public async Task ShouldCreatePearlItem()
+        public async Task Should_Create_Pearl_Item()
         {
-            var userId = await RunAsDefaultUserAsync();
-
-            var listId = await SendAsync(new CreatePearlListCommand
-            {
-                Title = "New List"
-            });
-
-            var command = new CreatePearlItemCommand
-            {
-                ListId = listId,
-                Title = "Tasks"
-            };
-
-            var itemId = await SendAsync(command);
-
-            var item = await FindAsync<PearlItem>(itemId);
-
-            item.Should().NotBeNull();
-            item.ListId.Should().Be(command.ListId);
-            item.Title.Should().Be(command.Title);
-            item.CreatedBy.Should().Be(userId);
-            item.Created.Should().BeCloseTo(DateTime.Now, 10000);
-            item.LastModifiedBy.Should().BeNull();
-            item.LastModified.Should().BeNull();
+            await CreatePearlItem_TestHarness.Build();
+            CreatePearlItem_TestHarness.Pearl_Item_Was_Created_Successfully_Based_Off_Command();
         }
     }
 }

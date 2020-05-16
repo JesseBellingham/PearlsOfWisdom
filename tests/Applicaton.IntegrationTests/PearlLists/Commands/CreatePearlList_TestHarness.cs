@@ -8,7 +8,7 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Commands
 {
     using static Testing;
     
-    public static class CreatePearlListCommand_TestHarness
+    public static class CreatePearlList_TestHarness
     {
         private static string _userId;
         private static PearlList _list;
@@ -26,7 +26,7 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Commands
             _list = await FindAsync<PearlList>(listId);
         }
 
-        public static void PearlListWasCreatedSuccessfullyBasedOffCommand()
+        public static void Pearl_List_Was_Created_Successfully_Based_Off_Command()
         {
             _list.Should().NotBeNull();
             _list.Title.Should().Be(_command.Title);

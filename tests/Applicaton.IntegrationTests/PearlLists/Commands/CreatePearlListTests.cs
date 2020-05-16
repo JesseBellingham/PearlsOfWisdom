@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 using PearlsOfWisdom.Application.Common.Exceptions;
 using PearlsOfWisdom.Application.PearlLists.Commands.CreatePearlList;
-using PearlsOfWisdom.Domain.Entities;
 
 namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Commands
 {
@@ -13,7 +11,7 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Commands
     public class CreatePearlListTests : TestBase
     {
         [Test]
-        public void ShouldRequireMinimumFields()
+        public void Should_Require_Minimum_Fields()
         {
             var command = new CreatePearlListCommand();
 
@@ -22,10 +20,10 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Commands
         }
         
         [Test]
-        public async Task ShouldCreatePearlList()
+        public async Task Should_Create_Pearl_List()
         {
-            await CreatePearlListCommand_TestHarness.Build();
-            CreatePearlListCommand_TestHarness.PearlListWasCreatedSuccessfullyBasedOffCommand();
+            await CreatePearlList_TestHarness.Build();
+            CreatePearlList_TestHarness.Pearl_List_Was_Created_Successfully_Based_Off_Command();
         }
     }
 }
