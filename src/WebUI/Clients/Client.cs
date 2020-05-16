@@ -213,22 +213,7 @@ namespace PearlsOfWisdom.WebUI.Clients
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.11.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class PearlsVm : System.ComponentModel.INotifyPropertyChanged
     {
-        private System.Collections.ObjectModel.ObservableCollection<PriorityLevelDto> _priorityLevels;
         private System.Collections.ObjectModel.ObservableCollection<PearlListDto> _lists;
-    
-        [Newtonsoft.Json.JsonProperty("priorityLevels", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<PriorityLevelDto> PriorityLevels
-        {
-            get { return _priorityLevels; }
-            set 
-            {
-                if (_priorityLevels != value)
-                {
-                    _priorityLevels = value; 
-                    RaisePropertyChanged();
-                }
-            }
-        }
     
         [Newtonsoft.Json.JsonProperty("lists", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<PearlListDto> Lists
@@ -252,61 +237,6 @@ namespace PearlsOfWisdom.WebUI.Clients
         public static PearlsVm FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PearlsVm>(data);
-        }
-    
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) 
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.11.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class PriorityLevelDto : System.ComponentModel.INotifyPropertyChanged
-    {
-        private int _value;
-        private string _name;
-    
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Value
-        {
-            get { return _value; }
-            set 
-            {
-                if (_value != value)
-                {
-                    _value = value; 
-                    RaisePropertyChanged();
-                }
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name
-        {
-            get { return _name; }
-            set 
-            {
-                if (_name != value)
-                {
-                    _name = value; 
-                    RaisePropertyChanged();
-                }
-            }
-        }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-    
-        public static PriorityLevelDto FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<PriorityLevelDto>(data);
         }
     
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;

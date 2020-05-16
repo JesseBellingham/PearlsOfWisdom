@@ -33,33 +33,12 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "priorityLevels": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/PriorityLevelDto"
-            }
-          },
           "lists": {
             "type": "array",
             "nullable": true,
             "items": {
               "$ref": "#/components/schemas/PearlListDto"
             }
-          }
-        }
-      },
-      "PriorityLevelDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
