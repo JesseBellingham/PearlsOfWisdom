@@ -21,24 +21,25 @@ namespace PearlsOfWisdom.Infrastructure.Persistence
         public static async Task SeedSampleDataAsync(ApplicationDbContext context)
         {
             // Seed, if necessary
-            if (!context.TodoLists.Any())
+            if (!context.PearlLists.Any())
             {
-                context.TodoLists.Add(new TodoList
+                context.PearlLists.Add(new PearlList
                 {
-                    Title = "Shopping",
+                    Title = "Some title",
                     Items =
                     {
-                        new TodoItem { Title = "Apples", Done = true },
-                        new TodoItem { Title = "Milk", Done = true },
-                        new TodoItem { Title = "Bread", Done = true },
-                        new TodoItem { Title = "Toilet paper" },
-                        new TodoItem { Title = "Pasta" },
-                        new TodoItem { Title = "Tissues" },
-                        new TodoItem { Title = "Tuna" },
-                        new TodoItem { Title = "Water" }
+                        new PearlItem
+                        {
+                            Title = "Some pearl item",
+                            Note = "Some note"
+                        },
+                        new PearlItem
+                        {
+                            Title = "Some other pearl item",
+                            Note = "Some other note",
+                        }
                     }
                 });
-
                 await context.SaveChangesAsync();
             }
         }

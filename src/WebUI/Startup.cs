@@ -1,19 +1,24 @@
-using PearlsOfWisdom.Application;
-using PearlsOfWisdom.Application.Common.Interfaces;
-using PearlsOfWisdom.Infrastructure;
-using PearlsOfWisdom.Infrastructure.Persistence;
-using PearlsOfWisdom.WebUI.Filters;
-using PearlsOfWisdom.WebUI.Services;
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using System.Linq;
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.Authorization;
+using PearlsOfWisdom.Application;
+using PearlsOfWisdom.Application.Common.Interfaces;
+using PearlsOfWisdom.Infrastructure;
+using PearlsOfWisdom.Infrastructure.Identity;
+using PearlsOfWisdom.Infrastructure.Persistence;
+using PearlsOfWisdom.WebUI.Clients;
+using PearlsOfWisdom.WebUI.Filters;
+using WebUI.Areas.Identity;
+using WebUI.Services;
 
 namespace PearlsOfWisdom.WebUI
 {
@@ -31,29 +36,32 @@ namespace PearlsOfWisdom.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddHttpContextAccessor();
+            services.AddHttpClients(Configuration);
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
 
-            services.AddControllersWithViews(options => 
-                options.Filters.Add(new ApiExceptionFilter()));
+
+            services.AddControllersWithViews(options =>
+                    options.Filters.Add(new ApiExceptionFilter()))
+                .AddNewtonsoftJson();
 
             services.AddRazorPages();
-
+            
             // Customise default API behaviour
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
-            });
-
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
             });
 
             services.AddOpenApiDocument(configure =>
@@ -86,13 +94,10 @@ namespace PearlsOfWisdom.WebUI
                 app.UseHsts();
             }
 
-            app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
+
+            app.UseOpenApi();
 
             app.UseSwaggerUi3(settings =>
             {
@@ -101,29 +106,16 @@ namespace PearlsOfWisdom.WebUI
             });
 
             app.UseRouting();
+            app.UseMvcWithDefaultRoute();
 
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
-
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                endpoints.MapControllers();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }

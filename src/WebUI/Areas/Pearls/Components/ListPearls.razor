@@ -1,0 +1,47 @@
+﻿@using PearlsOfWisdom.WebUI.Clients
+@inject IPearlsListClient _client;
+
+<h1>Pearls</h1>
+
+@* <NavLink class="nav-link btn btn-default" href="newcontact">Add New Contact</NavLink> *@
+
+<hr />
+
+@if (_model == null)
+{
+  <p>Loading...</p>
+}
+else if (_model.Lists.Any())
+{
+  @foreach (PearlListDto list in _model.Lists)
+  {
+    <div class="container-fluid">
+      <p>@list.Title</p>
+      <ul>
+      @foreach (PearlItemDto item in list.Items)
+      {
+        <li>
+          <input @bind="item.Title" />
+          <input @bind="item.Note" />
+        </li>
+      }
+        
+      </ul>
+    </div>
+  }
+}
+
+@functions {
+
+  private PearlsVm _model;
+  protected override async Task OnInitializedAsync()
+  {
+    await GetPearls();
+    await base.OnInitializedAsync();
+  }
+
+  private async Task GetPearls()
+  {
+     _model = await _client.GetAsync();
+  }
+}

@@ -1,15 +1,17 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace PearlsOfWisdom.WebUI.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public abstract class ApiController : ControllerBase
+    public class ApiController : ControllerBase
     {
-        private IMediator _mediator;
+        public ApiController(IMediator mediator)
+        {
+            Mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
 
-        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        protected IMediator Mediator { get; }
     }
 }

@@ -29,10 +29,10 @@ namespace PearlsOfWisdom.Infrastructure.Persistence
             _currentUserService = currentUserService;
             _dateTime = dateTime;
         }
+        
+        public DbSet<PearlList> PearlLists { get; set; }
 
-        public DbSet<TodoList> TodoLists { get; set; }
-
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<PearlItem> PearlItems { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

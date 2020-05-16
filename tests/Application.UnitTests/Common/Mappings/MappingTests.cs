@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using PearlsOfWisdom.Application.Common.Mappings;
-using PearlsOfWisdom.Application.TodoLists.Queries.GetTodos;
 using PearlsOfWisdom.Domain.Entities;
 using NUnit.Framework;
 using System;
+using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
 
 namespace PearlsOfWisdom.Application.UnitTests.Common.Mappings
 {
@@ -29,8 +29,8 @@ namespace PearlsOfWisdom.Application.UnitTests.Common.Mappings
         }
         
         [Test]
-        [TestCase(typeof(TodoList), typeof(TodoListDto))]
-        [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
+        [TestCase(typeof(PearlList), typeof(PearlListDto))]
+        [TestCase(typeof(PearlItem), typeof(PearlItemDto))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = Activator.CreateInstance(source);

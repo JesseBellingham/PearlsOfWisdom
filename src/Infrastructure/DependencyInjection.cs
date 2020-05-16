@@ -1,5 +1,4 @@
 ﻿using PearlsOfWisdom.Application.Common.Interfaces;
-using PearlsOfWisdom.Infrastructure.Files;
 using PearlsOfWisdom.Infrastructure.Identity;
 using PearlsOfWisdom.Infrastructure.Persistence;
 using PearlsOfWisdom.Infrastructure.Services;
@@ -29,15 +28,14 @@ namespace PearlsOfWisdom.Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
-                services.AddDefaultIdentity<ApplicationUser>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IIdentityService, IdentityService>();
-            services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();

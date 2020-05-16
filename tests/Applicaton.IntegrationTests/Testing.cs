@@ -1,11 +1,6 @@
-﻿using PearlsOfWisdom.Application.Common.Interfaces;
-using PearlsOfWisdom.Infrastructure.Identity;
-using PearlsOfWisdom.Infrastructure.Persistence;
-using PearlsOfWisdom.WebUI;
-using MediatR;
+﻿using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -14,6 +9,12 @@ using Respawn;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using PearlsOfWisdom.Application.Common.Interfaces;
+using PearlsOfWisdom.Infrastructure.Identity;
+using PearlsOfWisdom.Infrastructure.Persistence;
+using PearlsOfWisdom.WebUI;
 
 [SetUpFixture]
 public class Testing
@@ -113,7 +114,7 @@ public class Testing
         _currentUserId = null;
     }
 
-    public static async Task<T> FindAsync<T>(int id)
+    public static async Task<T> FindAsync<T>(Guid id)
         where T : class
     {
         using var scope = _scopeFactory.CreateScope();

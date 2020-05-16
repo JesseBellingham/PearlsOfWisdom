@@ -1,8 +1,8 @@
-﻿using PearlsOfWisdom.Application.Common.Interfaces;
+﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+using PearlsOfWisdom.Application.Common.Interfaces;
 
-namespace PearlsOfWisdom.WebUI.Services
+namespace WebUI.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

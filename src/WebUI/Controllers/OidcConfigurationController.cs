@@ -9,7 +9,9 @@ namespace PearlsOfWisdom.WebUI.Controllers
     {
         private readonly ILogger<OidcConfigurationController> logger;
 
-        public OidcConfigurationController(IClientRequestParametersProvider clientRequestParametersProvider, ILogger<OidcConfigurationController> _logger)
+        public OidcConfigurationController(
+            IClientRequestParametersProvider clientRequestParametersProvider,
+            ILogger<OidcConfigurationController> _logger)
         {
             ClientRequestParametersProvider = clientRequestParametersProvider;
             logger = _logger;

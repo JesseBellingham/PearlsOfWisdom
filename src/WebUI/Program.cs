@@ -1,17 +1,18 @@
-using PearlsOfWisdom.Infrastructure.Identity;
-using PearlsOfWisdom.Infrastructure.Persistence;
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+using PearlsOfWisdom.Infrastructure.Identity;
+using PearlsOfWisdom.Infrastructure.Persistence;
+using PearlsOfWisdom.WebUI;
 
-namespace PearlsOfWisdom.WebUI
+namespace WebUI
 {
-    public static class Program
+    public class Program
     {
         public static async Task Main(string[] args)
         {
@@ -37,7 +38,7 @@ namespace PearlsOfWisdom.WebUI
                 }
                 catch (Exception ex)
                 {
-                    var logger = scope.ServiceProvider.GetRequiredService<ILogger>();
+                    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 
                     logger.LogError(ex, "An error occurred while migrating or seeding the database.");
 
@@ -50,9 +51,6 @@ namespace PearlsOfWisdom.WebUI
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }
