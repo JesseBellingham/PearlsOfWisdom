@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -12,6 +14,8 @@ namespace PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem
         public Guid ListId { get; set; }
 
         public string Title { get; set; }
+        
+        public string Transcription { get; set; }
     }
 
     public class CreatePearlItemCommandHandler : IRequestHandler<CreatePearlItemCommand, Guid>
@@ -29,6 +33,7 @@ namespace PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem
             {
                 ListId = request.ListId,
                 Title = request.Title,
+                Transcription = request.Transcription,
                 Done = false
             };
 

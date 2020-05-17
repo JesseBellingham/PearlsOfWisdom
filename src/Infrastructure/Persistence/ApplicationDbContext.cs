@@ -33,6 +33,8 @@ namespace PearlsOfWisdom.Infrastructure.Persistence
         public DbSet<PearlList> PearlLists { get; set; }
 
         public DbSet<PearlItem> PearlItems { get; set; }
+        
+        public DbSet<KeyPoint> KeyPoints { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

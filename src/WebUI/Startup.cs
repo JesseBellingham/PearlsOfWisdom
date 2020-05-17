@@ -17,6 +17,8 @@ using PearlsOfWisdom.Infrastructure.Identity;
 using PearlsOfWisdom.Infrastructure.Persistence;
 using PearlsOfWisdom.WebUI.Clients;
 using PearlsOfWisdom.WebUI.Filters;
+using PearlsOfWisdom.WebUI.Pages;
+using PearlsOfWisdom.WebUI.Pages.Pearls;
 using WebUI.Areas.Identity;
 using WebUI.Services;
 
@@ -44,6 +46,7 @@ namespace PearlsOfWisdom.WebUI
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<ComponentState>();
 
             services.AddHttpContextAccessor();
             services.AddHttpClients(Configuration);

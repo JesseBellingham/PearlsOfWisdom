@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PearlsOfWisdom.Application.PearlLists.Queries.GetPearlListById;
 using PearlsOfWisdom.Application.PearlLists.Queries.GetPearlLists;
-using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
-using PearlsOfWisdom.WebUI.Services;
 
 namespace PearlsOfWisdom.WebUI.Controllers
 {

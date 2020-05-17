@@ -1,11 +1,12 @@
 ﻿@using PearlsOfWisdom.WebUI.Clients
 @inject IPearlItemClient _client;
+@inject ComponentState _state;
 
 
 <input @bind="@title" placeholder="New item"/>
 <button type="button" @onclick="Send">Create</button>
 
-@functions
+@code
 {
     [Parameter]
     public Guid ListId { get; set; }
@@ -13,6 +14,8 @@
     private string title;
     public async Task Send()
     {
-        await _client.CreateAsync(ListId, title);
+        // await _client.CreateAsync(ListId, title);
+        title = null;
+        _state.NotifyStateChanged();
     }
 }

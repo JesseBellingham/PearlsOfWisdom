@@ -14,6 +14,6 @@ namespace PearlsOfWisdom.Domain.Entities
 
         public string Colour { get; set; }
 
-        public IList<PearlItem> Items { get; set; }
+        public IList<PearlItem> Items { get; private set; }
     }
 }

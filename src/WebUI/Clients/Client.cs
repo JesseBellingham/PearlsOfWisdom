@@ -18,11 +18,11 @@ namespace PearlsOfWisdom.WebUI.Clients
     public partial interface IPearlItemClient
     {
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, System.Threading.CancellationToken cancellationToken);
     
     }
     
@@ -53,14 +53,14 @@ namespace PearlsOfWisdom.WebUI.Clients
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title)
+        public System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription)
         {
-            return CreateAsync(listId, title, System.Threading.CancellationToken.None);
+            return CreateAsync(listId, title, transcription, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/PearlItem?");
@@ -71,6 +71,10 @@ namespace PearlsOfWisdom.WebUI.Clients
             if (title != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Title") + "=").Append(System.Uri.EscapeDataString(ConvertToString(title, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (transcription != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Transcription") + "=").Append(System.Uri.EscapeDataString(ConvertToString(transcription, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
     

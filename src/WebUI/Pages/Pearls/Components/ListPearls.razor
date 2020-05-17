@@ -1,5 +1,7 @@
 ﻿@using PearlsOfWisdom.WebUI.Clients
+@implements IDisposable
 @inject IPearlsListClient _client;
+@inject ComponentState _state;
 
 <h1>Pearls</h1>
 
@@ -32,17 +34,29 @@ else if (_model.Lists.Any())
   }
 }
 
-@functions {
+@code {
 
   private PearlListsVm _model;
   protected override async Task OnInitializedAsync()
   {
+    _state.OnStateChanged += OnStateChanged;
     await GetPearls();
     await base.OnInitializedAsync();
+  }
+
+  private async Task OnStateChanged()
+  {
+    await GetPearls();
+    await InvokeAsync(StateHasChanged);
   }
 
   private async Task GetPearls()
   {
      _model = await _client.GetAsync();
+  }
+
+  public void Dispose()
+  {
+    _state.OnStateChanged -= OnStateChanged;
   }
 }

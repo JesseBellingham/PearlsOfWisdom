@@ -30,6 +30,15 @@
               "nullable": true
             },
             "x-position": 2
+          },
+          {
+            "name": "Transcription",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
           }
         ],
         "responses": {
