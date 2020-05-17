@@ -1,0 +1,18 @@
+﻿@using PearlsOfWisdom.WebUI.Clients
+@inject IPearlItemClient _client;
+
+
+<input @bind="@title" placeholder="New item"/>
+<button type="button" @onclick="Send">Create</button>
+
+@functions
+{
+    [Parameter]
+    public Guid ListId { get; set; }
+    
+    private string title;
+    public async Task Send()
+    {
+        await _client.CreateAsync(ListId, title);
+    }
+}

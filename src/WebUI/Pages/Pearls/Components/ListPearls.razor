@@ -18,14 +18,15 @@ else if (_model.Lists.Any())
     <div class="container-fluid">
       <p>@list.Title</p>
       <ul>
-      @foreach (PearlItemDto item in list.Items)
-      {
-        <li>
-          <input @bind="item.Title" />
-          <input @bind="item.Note" />
-        </li>
-      }
-        
+        <NewPearl ListId="@list.Id"/>
+        @foreach (PearlItemDto item in list.Items)
+        {
+          <li>
+            <input @bind="item.Title"/>
+            <input @bind="item.Note"/>
+          </li>
+        }
+
       </ul>
     </div>
   }
@@ -33,7 +34,7 @@ else if (_model.Lists.Any())
 
 @functions {
 
-  private PearlsVm _model;
+  private PearlListsVm _model;
   protected override async Task OnInitializedAsync()
   {
     await GetPearls();

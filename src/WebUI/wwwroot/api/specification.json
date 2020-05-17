@@ -6,6 +6,47 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/PearlItem": {
+      "post": {
+        "tags": [
+          "PearlItem"
+        ],
+        "operationId": "PearlItem_Create",
+        "parameters": [
+          {
+            "name": "ListId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "Title",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/PearlsList": {
       "get": {
         "tags": [
@@ -18,7 +59,39 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PearlsVm"
+                  "$ref": "#/components/schemas/PearlListsVm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PearlsList/{id}": {
+      "get": {
+        "tags": [
+          "PearlsList"
+        ],
+        "operationId": "PearlsList_Get2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PearlListVm"
                 }
               }
             }
@@ -29,7 +102,7 @@
   },
   "components": {
     "schemas": {
-      "PearlsVm": {
+      "PearlListsVm": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -85,6 +158,20 @@
           "note": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "PearlListVm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "list": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PearlListDto"
+              }
+            ]
           }
         }
       }

@@ -1,18 +1,19 @@
 ﻿using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
+using PearlsOfWisdom.Application.PearlLists.Queries.GetPearlLists;
 using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
 
 namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Queries
 {
     using static Testing;
 
-    public class GetPearlsTests : TestBase
+    public class GetPearlListsTests : TestBase
     {
         [Test]
-        public async Task ShouldGetAllListsAndItems()
+        public async Task Should_Get_All_Lists_And_Items()
         {
-            var query = new GetPearlsQuery();
+            var query = new GetPearlListsQuery();
 
             var result = await SendAsync(query);
 

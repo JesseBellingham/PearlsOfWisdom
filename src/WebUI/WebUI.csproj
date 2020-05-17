@@ -38,13 +38,13 @@
     </Target>
 
     <ItemGroup>
-      <Content Update="Areas\Pearls\Pages\Index.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
+      <Folder Include="Areas\Shared" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\Shared" />
+      <Content Update="Pages\Pearls\Components\NewPearl.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
     </ItemGroup>
 
 </Project>

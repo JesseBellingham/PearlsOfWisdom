@@ -8,25 +8,38 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Commands
 {
     using static Testing;
     
-    public static class CreatePearlList_TestHarness
+    public class CreatePearlList_TestHarness
     {
         private static string _userId;
         private static PearlList _list;
         private static CreatePearlListCommand _command;
+        private static string _title;
 
-        public static async Task Build()
+        public CreatePearlList_TestHarness WithUser(string userId)
         {
-            _userId = await RunAsDefaultUserAsync();
+            _userId = userId;
+            return this;
+        }
+
+        public CreatePearlList_TestHarness WithTitle(string title)
+        {
+            _title = title;
+            return this;
+        }
+
+        public async Task<CreatePearlList_TestHarness> Build()
+        {
             _command = new CreatePearlListCommand
             {
-                Title = "New List"
+                Title = _title
             };
 
             var listId = await SendAsync(_command);
             _list = await FindAsync<PearlList>(listId);
+            return this;
         }
 
-        public static void Pearl_List_Was_Created_Successfully_Based_Off_Command()
+        public void Pearl_List_Was_Created_Successfully_Based_Off_Command()
         {
             _list.Should().NotBeNull();
             _list.Title.Should().Be(_command.Title);

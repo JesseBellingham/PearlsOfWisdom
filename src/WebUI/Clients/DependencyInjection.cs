@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,9 +11,15 @@ namespace PearlsOfWisdom.WebUI.Clients
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var baseUrl = configuration.GetSection("ApiBaseUrl")?.Value;
-            services.AddHttpClient<IPearlsListClient, PearlsListClient>(client => client.BaseAddress = new Uri(baseUrl));
+            services.AddHttpClient<IPearlsListClient, PearlsListClient>(ConfigureClient(configuration));
+            services.AddHttpClient<IPearlItemClient, PearlItemClient>(ConfigureClient(configuration));
             return services;
+        }
+
+        private static Action<HttpClient> ConfigureClient(IConfiguration configuration)
+        {
+            var baseUrl = configuration.GetSection("ApiBaseUrl")?.Value;
+            return client => client.BaseAddress = new Uri(baseUrl);
         }
     }
 }
