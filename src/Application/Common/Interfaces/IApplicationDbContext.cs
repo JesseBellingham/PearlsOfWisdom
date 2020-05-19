@@ -10,6 +10,8 @@ namespace PearlsOfWisdom.Application.Common.Interfaces
         DbSet<PearlList> PearlLists { get; set; }
 
         DbSet<PearlItem> PearlItems { get; set; }
+        
+        DbSet<KeyPoint> KeyPoints { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

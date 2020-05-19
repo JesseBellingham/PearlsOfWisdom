@@ -620,6 +620,7 @@ namespace PearlsOfWisdom.WebUI.Clients
         private string _author;
         private bool _done;
         private string _note;
+        private System.Collections.ObjectModel.ObservableCollection<KeyPointDto> _keyPoints;
     
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Id
@@ -719,6 +720,20 @@ namespace PearlsOfWisdom.WebUI.Clients
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("keyPoints", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyPointDto> KeyPoints
+        {
+            get { return _keyPoints; }
+            set 
+            {
+                if (_keyPoints != value)
+                {
+                    _keyPoints = value; 
+                    RaisePropertyChanged();
+                }
+            }
+        }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -727,6 +742,46 @@ namespace PearlsOfWisdom.WebUI.Clients
         public static PearlItemDto FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PearlItemDto>(data);
+        }
+    
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) 
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.11.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class KeyPointDto : System.ComponentModel.INotifyPropertyChanged
+    {
+        private string _text;
+    
+        [Newtonsoft.Json.JsonProperty("text", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Text
+        {
+            get { return _text; }
+            set 
+            {
+                if (_text != value)
+                {
+                    _text = value; 
+                    RaisePropertyChanged();
+                }
+            }
+        }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+    
+        public static KeyPointDto FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyPointDto>(data);
         }
     
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;

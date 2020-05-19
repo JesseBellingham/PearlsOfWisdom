@@ -184,6 +184,23 @@
           "note": {
             "type": "string",
             "nullable": true
+          },
+          "keyPoints": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/KeyPointDto"
+            }
+          }
+        }
+      },
+      "KeyPointDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

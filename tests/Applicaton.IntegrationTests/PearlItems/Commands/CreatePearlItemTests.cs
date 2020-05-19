@@ -22,8 +22,11 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
         [Test]
         public async Task Should_Create_Pearl_Item()
         {
-            await CreatePearlItem_TestHarness.Build();
-            CreatePearlItem_TestHarness.Pearl_Item_Was_Created_Successfully_Based_Off_Command();
+            var sut = await new CreatePearlItem_TestHarness()
+                .WithTitle("Some title")
+                .Build();
+            
+            sut.Pearl_Item_Was_Created_Successfully_Based_Off_Command();
         }
     }
 }

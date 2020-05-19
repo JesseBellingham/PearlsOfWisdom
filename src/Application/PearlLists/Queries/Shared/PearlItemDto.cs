@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using PearlsOfWisdom.Application.Common.Mappings;
 using PearlsOfWisdom.Domain.Entities;
@@ -20,6 +21,8 @@ namespace PearlsOfWisdom.Application.PearlLists.Queries.Shared
         public bool Done { get; set; }
 
         public string Note { get; set; }
+        
+        public IList<KeyPointDto> KeyPoints { get; set; }
 
         public void Mapping(Profile profile)
         {

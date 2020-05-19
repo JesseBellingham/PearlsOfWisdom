@@ -9,13 +9,21 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
 {
     using static Testing;
     
-    public static class CreatePearlItem_TestHarness
+    public class CreatePearlItem_TestHarness
     {
-        private static string _userId;
-        private static PearlItem _item;
-        private static CreatePearlItemCommand _command;
+        private string _userId;
+        private string _title;
+        private string _author;
+        private PearlItem _item;
+        private CreatePearlItemCommand _command;
+
+        public CreatePearlItem_TestHarness WithTitle(string title)
+        {
+            _title = title;
+            return this;
+        }
         
-        public static async Task Build()
+        public async Task<CreatePearlItem_TestHarness> Build()
         {
             _userId = await RunAsDefaultUserAsync();
 
@@ -27,20 +35,21 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlItems.Commands
             _command = new CreatePearlItemCommand
             {
                 ListId = listId,
-                Title = "Tasks"
+                Title = _title,
+                Author = _author
             };
 
             var itemId = await SendAsync(_command);
 
             _item = await FindAsync<PearlItem>(itemId);
-            
+            return this;
         }
 
-        public static void Pearl_Item_Was_Created_Successfully_Based_Off_Command()
+        public void Pearl_Item_Was_Created_Successfully_Based_Off_Command()
         {
-            _item.Should().NotBeNull();
             _item.ListId.Should().Be(_command.ListId);
             _item.Title.Should().Be(_command.Title);
+            _item.Author.Should().Be(_command.Author);
             _item.CreatedBy.Should().Be(_userId);
             _item.Created.Should().BeCloseTo(DateTime.Now, 10000);
             _item.LastModifiedBy.Should().BeNull();
