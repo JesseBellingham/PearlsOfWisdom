@@ -6,12 +6,7 @@
             <h5 class="card-title">@Model.Title</h5>
             <p class="">@Model.Note</p>
             <p>@Model.Author</p>
-            <p>Key points:</p>
-            <ul class="list-group">
-                <li class="list-group-item">Some key point</li>
-                <li class="list-group-item">Some other key point</li>
-                <li class="list-group-item">A third key point</li>
-            </ul>
+            <ListKeyPoints />
         </div>
         <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseTranscription" aria-expanded="false" aria-controls="collapseTranscription">
             Show Transcription

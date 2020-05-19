@@ -52,6 +52,12 @@
       <Content Update="Pages\Pearls\Components\NewPearl.razor">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </Content>
+      <Content Update="Pages\Pearls\Components\KeyPoint.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+      <Content Update="Pages\Pearls\Components\ListKeyPoints.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
     </ItemGroup>
 
 </Project>
