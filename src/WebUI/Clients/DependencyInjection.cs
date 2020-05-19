@@ -7,19 +7,21 @@ namespace PearlsOfWisdom.WebUI.Clients
 {
     public static class DependencyInjection
     {
+        private static string _baseUrl;
+        
         public static IServiceCollection AddHttpClients(
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddHttpClient<IPearlsListClient, PearlsListClient>(ConfigureClient(configuration));
-            services.AddHttpClient<IPearlItemClient, PearlItemClient>(ConfigureClient(configuration));
+            _baseUrl = configuration.GetSection("ApiBaseUrl")?.Value;
+            services.AddHttpClient<IPearlsListClient, PearlsListClient>(ConfigureClient());
+            services.AddHttpClient<IPearlItemClient, PearlItemClient>(ConfigureClient());
             return services;
         }
 
-        private static Action<HttpClient> ConfigureClient(IConfiguration configuration)
+        private static Action<HttpClient> ConfigureClient()
         {
-            var baseUrl = configuration.GetSection("ApiBaseUrl")?.Value;
-            return client => client.BaseAddress = new Uri(baseUrl);
+            return client => client.BaseAddress = new Uri(_baseUrl);
         }
     }
 }

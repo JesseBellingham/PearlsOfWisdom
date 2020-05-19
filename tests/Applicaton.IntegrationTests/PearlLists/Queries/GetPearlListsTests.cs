@@ -2,7 +2,6 @@
 using FluentAssertions;
 using NUnit.Framework;
 using PearlsOfWisdom.Application.PearlLists.Queries.GetPearlLists;
-using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
 
 namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Queries
 {

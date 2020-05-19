@@ -1,21 +1,14 @@
-﻿@using PearlsOfWisdom.WebUI.Clients
-@inject IPearlItemClient _client;
-@inject ComponentState _state;
-
-
-<input @bind="@title" placeholder="New item"/>
-<button type="button" @onclick="Send">Create</button>
+﻿<div class="mb-3">
+    <button class="btn btn-primary mb-3" type="button" data-toggle="collapse" data-target="#collapseNewPearlForm" aria-expanded="false" aria-controls="collapseNewPearlForm">
+        Add new pearl
+    </button>
+    <div class="collapse" id="collapseNewPearlForm">
+        <NewPearlForm ListId="@ListId"/>
+    </div>
+</div>
 
 @code
 {
     [Parameter]
     public Guid ListId { get; set; }
-    
-    private string title;
-    public async Task Send()
-    {
-        // await _client.CreateAsync(ListId, title);
-        title = null;
-        _state.NotifyStateChanged();
-    }
 }

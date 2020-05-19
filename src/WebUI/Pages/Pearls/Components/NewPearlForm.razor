@@ -1,0 +1,46 @@
+﻿@using PearlsOfWisdom.WebUI.Clients
+@inject IPearlItemClient _client;
+@inject ComponentState _state;
+
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="label-title">Title</span>
+  </div>
+  <input @bind="@title" type="text" class="form-control" id="input-title" aria-describedby="label-title">
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="label-author">Author</span>
+  </div>
+  <input @bind="@author" type="text" class="form-control" id="input-author" aria-describedby="label-author">
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Transcription</span>
+  </div>
+  <textarea @bind="@transcription" class="form-control" aria-label="Transcription" ></textarea>
+</div>
+<button type="button" class="btn btn-success" @onclick="Send">Create</button>
+
+@code
+{
+    [Parameter]
+    public Guid ListId { get; set; }
+    
+    private string title;
+    
+    private string transcription;
+
+    private string author;
+    public async Task Send()
+    {
+        await _client.CreateAsync(ListId, title, transcription, author);
+        title = null;
+        author = null;
+        transcription = null;
+        _state.NotifyStateChanged();
+    }
+}

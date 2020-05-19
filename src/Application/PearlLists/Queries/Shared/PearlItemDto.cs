@@ -3,7 +3,7 @@ using AutoMapper;
 using PearlsOfWisdom.Application.Common.Mappings;
 using PearlsOfWisdom.Domain.Entities;
 
-namespace PearlsOfWisdom.Application.PearlLists.Queries.GetPearls
+namespace PearlsOfWisdom.Application.PearlLists.Queries.Shared
 {
     public class PearlItemDto : IMapFrom<PearlItem>
     {
@@ -12,6 +12,10 @@ namespace PearlsOfWisdom.Application.PearlLists.Queries.GetPearls
         public Guid ListId { get; set; }
 
         public string Title { get; set; }
+        
+        public string Transcription { get; set; }
+        
+        public string Author { get; set; }
 
         public bool Done { get; set; }
 

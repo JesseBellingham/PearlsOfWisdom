@@ -39,6 +39,15 @@
               "nullable": true
             },
             "x-position": 3
+          },
+          {
+            "name": "Author",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4
           }
         ],
         "responses": {
@@ -158,6 +167,14 @@
             "format": "guid"
           },
           "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "transcription": {
+            "type": "string",
+            "nullable": true
+          },
+          "author": {
             "type": "string",
             "nullable": true
           },

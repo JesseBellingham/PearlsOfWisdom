@@ -24,7 +24,8 @@ namespace PearlsOfWisdom.Infrastructure.Persistence
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions,
             ICurrentUserService currentUserService,
-            IDateTime dateTime) : base(options, operationalStoreOptions)
+            IDateTime dateTime)
+            : base(options, operationalStoreOptions)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;

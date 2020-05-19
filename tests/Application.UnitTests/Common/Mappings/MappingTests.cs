@@ -3,7 +3,7 @@ using PearlsOfWisdom.Application.Common.Mappings;
 using PearlsOfWisdom.Domain.Entities;
 using NUnit.Framework;
 using System;
-using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
+using PearlsOfWisdom.Application.PearlLists.Queries.Shared;
 
 namespace PearlsOfWisdom.Application.UnitTests.Common.Mappings
 {

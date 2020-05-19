@@ -7,7 +7,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PearlsOfWisdom.Application.Common.Interfaces;
-using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
+using PearlsOfWisdom.Application.PearlLists.Queries.Shared;
 
 namespace PearlsOfWisdom.Application.PearlLists.Queries.GetPearlLists
 {

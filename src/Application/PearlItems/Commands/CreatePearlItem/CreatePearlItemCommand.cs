@@ -16,6 +16,8 @@ namespace PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem
         public string Title { get; set; }
         
         public string Transcription { get; set; }
+        
+        public string Author { get; set; }
     }
 
     public class CreatePearlItemCommandHandler : IRequestHandler<CreatePearlItemCommand, Guid>
@@ -34,6 +36,7 @@ namespace PearlsOfWisdom.Application.PearlItems.Commands.CreatePearlItem
                 ListId = request.ListId,
                 Title = request.Title,
                 Transcription = request.Transcription,
+                Author = request.Author,
                 Done = false
             };
 

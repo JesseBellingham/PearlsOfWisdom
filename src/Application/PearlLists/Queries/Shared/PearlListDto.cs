@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using PearlsOfWisdom.Application.Common.Mappings;
 using PearlsOfWisdom.Domain.Entities;
-using System.Collections.Generic;
 
-namespace PearlsOfWisdom.Application.PearlLists.Queries.GetPearls
+namespace PearlsOfWisdom.Application.PearlLists.Queries.Shared
 {
     public class PearlListDto : IMapFrom<PearlList>
 {

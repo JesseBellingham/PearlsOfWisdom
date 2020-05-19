@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PearlsOfWisdom.Application.PearlLists.Queries.GetPearls;
+using PearlsOfWisdom.Application.PearlLists.Queries.Shared;
 
 namespace PearlsOfWisdom.Application.PearlLists.Queries.GetPearlLists
 {

@@ -18,11 +18,11 @@ namespace PearlsOfWisdom.WebUI.Clients
     public partial interface IPearlItemClient
     {
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, string author);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, string author, System.Threading.CancellationToken cancellationToken);
     
     }
     
@@ -53,14 +53,14 @@ namespace PearlsOfWisdom.WebUI.Clients
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
     
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription)
+        public System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, string author)
         {
-            return CreateAsync(listId, title, transcription, System.Threading.CancellationToken.None);
+            return CreateAsync(listId, title, transcription, author, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Guid> CreateAsync(System.Guid? listId, string title, string transcription, string author, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("api/PearlItem?");
@@ -75,6 +75,10 @@ namespace PearlsOfWisdom.WebUI.Clients
             if (transcription != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Transcription") + "=").Append(System.Uri.EscapeDataString(ConvertToString(transcription, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (author != null) 
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Author") + "=").Append(System.Uri.EscapeDataString(ConvertToString(author, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
     
@@ -612,6 +616,8 @@ namespace PearlsOfWisdom.WebUI.Clients
         private System.Guid _id;
         private System.Guid _listId;
         private string _title;
+        private string _transcription;
+        private string _author;
         private bool _done;
         private string _note;
     
@@ -652,6 +658,34 @@ namespace PearlsOfWisdom.WebUI.Clients
                 if (_title != value)
                 {
                     _title = value; 
+                    RaisePropertyChanged();
+                }
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("transcription", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Transcription
+        {
+            get { return _transcription; }
+            set 
+            {
+                if (_transcription != value)
+                {
+                    _transcription = value; 
+                    RaisePropertyChanged();
+                }
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("author", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Author
+        {
+            get { return _author; }
+            set 
+            {
+                if (_author != value)
+                {
+                    _author = value; 
                     RaisePropertyChanged();
                 }
             }
