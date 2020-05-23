@@ -6,7 +6,7 @@ using PearlsOfWisdom.Domain.Entities;
 
 namespace PearlsOfWisdom.Application.PearlLists.Queries.Shared
 {
-    public class PearlItemDto : IMapFrom<PearlItem>
+    public class PearlItemVm : IMapFrom<PearlItem>
     {
         public Guid Id { get; set; }
 
@@ -22,11 +22,11 @@ namespace PearlsOfWisdom.Application.PearlLists.Queries.Shared
 
         public string Note { get; set; }
         
-        public IList<KeyPointDto> KeyPoints { get; set; }
+        public IList<KeyPointVm> KeyPoints { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<PearlItem, PearlItemDto>();
+            profile.CreateMap<PearlItem, PearlItemVm>();
         }
     }
 }

@@ -6,6 +6,79 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/KeyPoint": {
+      "post": {
+        "tags": [
+          "KeyPoint"
+        ],
+        "operationId": "KeyPoint_Create",
+        "parameters": [
+          {
+            "name": "PearlItemId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "Text",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "guid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "KeyPoint"
+        ],
+        "operationId": "KeyPoint_Get",
+        "parameters": [
+          {
+            "name": "pearlId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyPointVm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/PearlItem": {
       "post": {
         "tags": [
@@ -70,14 +143,17 @@
         "tags": [
           "PearlsList"
         ],
-        "operationId": "PearlsList_Get",
+        "operationId": "PearlsList_GetAll",
         "responses": {
           "200": {
             "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PearlListsVm"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PearlListVm"
+                  }
                 }
               }
             }
@@ -90,7 +166,7 @@
         "tags": [
           "PearlsList"
         ],
-        "operationId": "PearlsList_Get2",
+        "operationId": "PearlsList_Get",
         "parameters": [
           {
             "name": "id",
@@ -120,20 +196,21 @@
   },
   "components": {
     "schemas": {
-      "PearlListsVm": {
+      "KeyPointVm": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "lists": {
-            "type": "array",
-            "nullable": true,
-            "items": {
-              "$ref": "#/components/schemas/PearlListDto"
-            }
+          "pearlItemId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
-      "PearlListDto": {
+      "PearlListVm": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -149,12 +226,12 @@
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/PearlItemDto"
+              "$ref": "#/components/schemas/PearlItemVm"
             }
           }
         }
       },
-      "PearlItemDto": {
+      "PearlItemVm": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -189,32 +266,8 @@
             "type": "array",
             "nullable": true,
             "items": {
-              "$ref": "#/components/schemas/KeyPointDto"
+              "$ref": "#/components/schemas/KeyPointVm"
             }
-          }
-        }
-      },
-      "KeyPointDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "text": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "PearlListVm": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "list": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/PearlListDto"
-              }
-            ]
           }
         }
       }

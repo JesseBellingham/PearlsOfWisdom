@@ -1,0 +1,46 @@
+﻿@using PearlsOfWisdom.WebUI.Clients
+@implements IDisposable
+@inject ComponentState _state;
+@inject IKeyPointClient _client;
+
+<p>Key points:</p>
+<ul class="list-group">
+    @foreach (var point in Items)
+    {
+        <li class="list-group-item">@point.Text</li>
+    }
+    <li class="list-group-item"><NewKeyPoint PearlId="@PearlId" /></li>
+</ul>
+
+@code
+{
+    
+    [Parameter]
+    public Guid PearlId { get; set; }
+
+    [Parameter]
+    public IList<KeyPointVm> Items { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _state.OnStateChanged += OnStateChanged;
+        await GetKeyPoints();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetKeyPoints()
+    {
+        Items = await _client.GetAsync(PearlId);
+    }
+    
+    private async Task OnStateChanged()
+    {
+        await GetKeyPoints();
+        await InvokeAsync(StateHasChanged);
+    }
+    
+    public void Dispose()
+    {
+        _state.OnStateChanged -= OnStateChanged;
+    }
+}

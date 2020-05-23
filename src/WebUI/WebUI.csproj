@@ -42,22 +42,24 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="Pages\Pearls\Components\NewPearlForm.razor">
+      <Content Update="Pages\Pearls\Components\NewPearl\NewPearl.razor">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       </Content>
-      <Content Update="Pages\Pearls\Components\ListItem.razor">
+      <Content Update="Pages\Pearls\Components\NewPearl\NewPearlForm.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+      <Content Update="Pages\Pearls\Components\ListPearls.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+      <Content Update="Pages\Pearls\Components\PearlListItem.razor">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </Content>
-      <Content Update="Pages\Pearls\Components\NewPearl.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Pages\Pearls\Components\KeyPoint.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
-      <Content Update="Pages\Pearls\Components\ListKeyPoints.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Pearls\Components\ListPearls\NewPearl\NewPearl.razor" />
+      <_ContentIncludedByDefault Remove="Pages\Pearls\Components\ListPearls\NewPearl\NewPearlForm.razor" />
     </ItemGroup>
 
 </Project>

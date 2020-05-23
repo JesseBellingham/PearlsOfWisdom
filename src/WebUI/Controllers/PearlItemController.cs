@@ -16,7 +16,7 @@ namespace PearlsOfWisdom.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult<Guid>> Create(CreatePearlItemCommand command)
         {
-            return await Mediator.Send(command);
+            return Ok(await Mediator.Send(command));
         }
     }
 }

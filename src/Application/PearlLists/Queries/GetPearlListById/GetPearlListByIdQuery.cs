@@ -29,14 +29,11 @@ namespace PearlsOfWisdom.Application.PearlLists.Queries.GetPearlListById
 
         public async Task<PearlListVm> Handle(GetPearlListByIdQuery request, CancellationToken cancellationToken)
         {
-            return new PearlListVm
-            {
-                List = await _context.PearlLists
-                    .Where(_ => _.Id == request.ListId)
-                    .ProjectTo<PearlListDto>(_mapper.ConfigurationProvider)
-                    .OrderBy(t => t.Title)
-                    .SingleOrDefaultAsync(cancellationToken)
-            };
+            return await _context.PearlLists
+                .Where(_ => _.Id == request.ListId)
+                .ProjectTo<PearlListVm>(_mapper.ConfigurationProvider)
+                .OrderBy(t => t.Title)
+                .SingleOrDefaultAsync(cancellationToken);
         }
     }
 }

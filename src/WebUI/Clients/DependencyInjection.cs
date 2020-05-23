@@ -16,6 +16,7 @@ namespace PearlsOfWisdom.WebUI.Clients
             _baseUrl = configuration.GetSection("ApiBaseUrl")?.Value;
             services.AddHttpClient<IPearlsListClient, PearlsListClient>(ConfigureClient());
             services.AddHttpClient<IPearlItemClient, PearlItemClient>(ConfigureClient());
+            services.AddHttpClient<IKeyPointClient, KeyPointClient>(ConfigureClient());
             return services;
         }
 

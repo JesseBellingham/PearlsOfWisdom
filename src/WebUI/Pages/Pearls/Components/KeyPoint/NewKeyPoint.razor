@@ -1,0 +1,26 @@
+@using PearlsOfWisdom.WebUI.Clients
+@inject IKeyPointClient _client;
+@inject ComponentState _state;
+
+<div class="input-group">
+  <input @bind="@keyPoint" type="text" class="form-control" id="input-title" aria-describedby="label-title" @onblur="CreateKeyPoint">
+</div>
+
+
+@code
+{
+  [Parameter]
+  public Guid PearlId { get; set; }
+  
+  private string keyPoint { get; set; }
+
+  private async Task CreateKeyPoint()
+  {
+    if (!string.IsNullOrWhiteSpace(keyPoint))
+    {
+      await _client.CreateAsync(PearlId, keyPoint);
+      keyPoint = null;
+      _state.NotifyStateChanged();
+    }
+  }
+}

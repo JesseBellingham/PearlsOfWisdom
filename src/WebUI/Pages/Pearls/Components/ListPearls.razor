@@ -1,28 +1,27 @@
 ﻿@using PearlsOfWisdom.WebUI.Clients
+@using PearlsOfWisdom.WebUI.Pages.Pearls.Components.NewPearl
 @implements IDisposable
 @inject IPearlsListClient _client;
 @inject ComponentState _state;
 
 <h1>Pearls</h1>
 
-@* <NavLink class="nav-link btn btn-default" href="newcontact">Add New Contact</NavLink> *@
-
 <hr />
 
-@if (_model == null)
+@if (!lists.Any())
 {
   <p>Loading...</p>
 }
-else if (_model.Lists.Any())
+else
 {
-  @foreach (PearlListDto list in _model.Lists)
+  @foreach (PearlListVm list in lists)
   {
     <div class="container-fluid">
       <h3>@list.Title</h3>
       <NewPearl ListId="@list.Id" />
-      @foreach (PearlItemDto item in list.Items)
+      @foreach (PearlItemVm item in list.Items)
       {
-        <ListItem Model="@item"/>
+        <PearlListItem Model="@item"/>
       }
     </div>
   }
@@ -30,7 +29,7 @@ else if (_model.Lists.Any())
 
 @code {
 
-  private PearlListsVm _model;
+  private IList<PearlListVm> lists = new List<PearlListVm>();
   protected override async Task OnInitializedAsync()
   {
     _state.OnStateChanged += OnStateChanged;
@@ -46,7 +45,7 @@ else if (_model.Lists.Any())
 
   private async Task GetPearls()
   {
-     _model = await _client.GetAsync();
+     lists = await _client.GetAllAsync();
   }
 
   public void Dispose()

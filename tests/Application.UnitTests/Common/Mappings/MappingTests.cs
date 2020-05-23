@@ -29,8 +29,9 @@ namespace PearlsOfWisdom.Application.UnitTests.Common.Mappings
         }
         
         [Test]
-        [TestCase(typeof(PearlList), typeof(PearlListDto))]
-        [TestCase(typeof(PearlItem), typeof(PearlItemDto))]
+        [TestCase(typeof(PearlList), typeof(PearlListVm))]
+        [TestCase(typeof(PearlItem), typeof(PearlItemVm))]
+        [TestCase(typeof(KeyPoint), typeof(KeyPointVm))]
         public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
         {
             var instance = Activator.CreateInstance(source);

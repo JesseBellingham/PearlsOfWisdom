@@ -16,7 +16,7 @@ namespace PearlsOfWisdom.Application.IntegrationTests.PearlLists.Queries
 
             var result = await SendAsync(query);
 
-            result.Lists.Should().HaveCount(0);
+            result.Should().HaveCount(0);
         }
     }
 }
