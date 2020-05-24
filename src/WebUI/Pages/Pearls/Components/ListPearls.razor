@@ -2,7 +2,7 @@
 @using PearlsOfWisdom.WebUI.Pages.Pearls.Components.NewPearl
 @implements IDisposable
 @inject IPearlsListClient _client;
-@inject ComponentState _state;
+@inject PearlsListStateContainer StateContainer;
 
 <h1>Pearls</h1>
 
@@ -32,12 +32,12 @@ else
   private IList<PearlListVm> lists = new List<PearlListVm>();
   protected override async Task OnInitializedAsync()
   {
-    _state.OnStateChanged += OnStateChanged;
+    StateContainer.OnStateChanged += OnStateContainerChanged;
     await GetPearls();
     await base.OnInitializedAsync();
   }
 
-  private async Task OnStateChanged()
+  private async Task OnStateContainerChanged()
   {
     await GetPearls();
     await InvokeAsync(StateHasChanged);
@@ -50,6 +50,6 @@ else
 
   public void Dispose()
   {
-    _state.OnStateChanged -= OnStateChanged;
+    StateContainer.OnStateChanged -= OnStateContainerChanged;
   }
 }

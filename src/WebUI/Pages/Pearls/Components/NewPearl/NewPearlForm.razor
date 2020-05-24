@@ -1,6 +1,6 @@
 ﻿@using PearlsOfWisdom.WebUI.Clients
 @inject IPearlItemClient _client;
-@inject ComponentState _state;
+@inject PearlsListStateContainer StateContainer;
 
 
 <div class="input-group mb-3">
@@ -41,6 +41,6 @@
         title = null;
         author = null;
         transcription = null;
-        _state.NotifyStateChanged();
+        StateContainer.NotifyStateChanged();
     }
 }

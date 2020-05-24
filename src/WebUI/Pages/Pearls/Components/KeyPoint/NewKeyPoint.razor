@@ -1,6 +1,6 @@
 @using PearlsOfWisdom.WebUI.Clients
 @inject IKeyPointClient _client;
-@inject ComponentState _state;
+@inject KeyPointsListStateContainer StateContainer;
 
 <div class="input-group">
   <input @bind="@keyPoint" type="text" class="form-control" id="input-title" aria-describedby="label-title" @onblur="CreateKeyPoint">
@@ -20,7 +20,7 @@
     {
       await _client.CreateAsync(PearlId, keyPoint);
       keyPoint = null;
-      _state.NotifyStateChanged();
+      StateContainer.NotifyStateChanged();
     }
   }
 }

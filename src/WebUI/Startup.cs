@@ -45,7 +45,8 @@ namespace PearlsOfWisdom.WebUI
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<ComponentState>();
+            services.AddScoped<PearlsListStateContainer>();
+            services.AddScoped<KeyPointsListStateContainer>();
 
             services.AddHttpContextAccessor();
             services.AddHttpClients(Configuration);
